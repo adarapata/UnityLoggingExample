@@ -96,6 +96,8 @@ namespace CoinGame
                 .OutputTemplate("{Timestamp} - {Level} - {Message}")
                 .CaptureStacktrace()
                 .RedirectUnityLogs()
+                .WriteTo.File("Logs/coin_game_log.txt", minLevel: LogLevel.Info)
+                .WriteTo.JsonFile("Logs/coin_game_log.json", minLevel: LogLevel.Info)
                 .WriteTo.UnityEditorConsole();
 
             Log.Logger = new Unity.Logging.Logger(config);

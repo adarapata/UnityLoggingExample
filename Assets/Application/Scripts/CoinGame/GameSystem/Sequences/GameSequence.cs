@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CoinGame.GameSystems.EndCondition;
 using CoinGame.GameSystems.Presentation;
 using CoinGame.GameSystems.Signals;
+using Unity.Logging;
 using UnityEngine;
 
 namespace CoinGame.GameSystems.Sequences
@@ -49,6 +50,7 @@ namespace CoinGame.GameSystems.Sequences
             _gameTimer.StartTimer();
             _coinCounter.CountStart();
             _finishableCollection.ApplyFinishRule(OnGameFinish);
+            Log.Info("Game Start !");
             _gameStartSignal.Fire(new GameStartSignal()); // ゲーム開始したことを通知する
         }
 
@@ -63,9 +65,17 @@ namespace CoinGame.GameSystems.Sequences
             {
                 _endPresentation.ShowGameOver();
             }
+            Log.Info("Game End ! Result {0}", _resultType);
             _gameEndSignal.Fire(new GameEndSignal(_resultType));
         }
 
-        private void OnGameFinish(GameResultType obj) => _resultType = obj;
+        private void OnGameFinish(GameResultType obj)
+        {
+            if (_resultType != GameResultType.None)
+            {
+                Log.Warning("Game Finish is already called. {0}", obj);
+            }
+            _resultType = obj;
+        }
     }
 }
