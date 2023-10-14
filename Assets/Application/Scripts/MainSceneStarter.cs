@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CoinGame;
 using CoinGame.Coin;
 using CoinGame.GameSystems;
 using CoinGame.GameSystems.Actors;
@@ -33,11 +32,6 @@ namespace CoinGame
         [SerializeField] private List<CoinBehaviour> _coinBehaviour;
 
         private CoinGameEntryPoint _entryPoint;
-
-        private void Awake()
-        {
-            InitializeLogging();
-        }
 
         async void Start()
         {
@@ -89,7 +83,8 @@ namespace CoinGame
             }
         }
 
-        private void InitializeLogging()
+        [RuntimeInitializeOnLoadMethod]
+        public static void InitializeLogger()
         {
             var config = new LoggerConfig()
                 .MinimumLevel.Debug()
