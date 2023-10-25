@@ -87,13 +87,13 @@ namespace CoinGame
         public static void InitializeLogger()
         {
             var config = new LoggerConfig()
-                .MinimumLevel.Debug()
-                .OutputTemplate("{Timestamp} - {Level} - {Message}")
-                .CaptureStacktrace()
-                .RedirectUnityLogs()
-                .WriteTo.File("Logs/coin_game_log.txt", minLevel: LogLevel.Info)
-                .WriteTo.JsonFile("Logs/coin_game_log.json", minLevel: LogLevel.Info)
-                .WriteTo.UnityEditorConsole();
+                .MinimumLevel.Debug()                                                            // MinimumLevelをDebugに設定
+                .OutputTemplate("{Timestamp} - {Level} - {Message}")            // ログテンプレートの設定
+                .CaptureStacktrace()                                                             // スタックトレースのキャプチャを有効化
+                .RedirectUnityLogs()                                                             // UnityDebugLogをリダイレクトさせる   
+                .WriteTo.File("Logs/coin_game_log.txt", minLevel: LogLevel.Info)      // ログファイルを出力
+                .WriteTo.JsonFile("Logs/coin_game_log.json", minLevel: LogLevel.Info) // json形式でログファイルを出力
+                .WriteTo.UnityEditorConsole();                                                   // UnityEditorのコンソールに出力
 
             Log.Logger = new Unity.Logging.Logger(config);
         }
