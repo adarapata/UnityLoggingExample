@@ -89,8 +89,7 @@ namespace CoinGame
             var config = new LoggerConfig()
                 .MinimumLevel.Debug()                                                            // MinimumLevelをDebugに設定
                 .OutputTemplate("{Timestamp} - {Level} - {Message}")            // ログテンプレートの設定
-                .CaptureStacktrace()                                                             // スタックトレースのキャプチャを有効化
-                .RedirectUnityLogs()                                                             // UnityDebugLogをリダイレクトさせる   
+                .CaptureStacktrace()                                                            // スタックトレースのキャプチャを有効化
                 .WriteTo.File("Logs/coin_game_log.txt", minLevel: LogLevel.Info)      // ログファイルを出力
                 .WriteTo.JsonFile("Logs/coin_game_log.json", minLevel: LogLevel.Info) // json形式でログファイルを出力
                 .WriteTo.UnityEditorConsole();                                                   // UnityEditorのコンソールに出力
